@@ -1,4 +1,7 @@
 
+Overview
+-----------
+
 a fork repo from https://github.com/ma2rten/kaggle-evergreen
 
 modified to be used in cutepipe
@@ -6,8 +9,6 @@ modified to be used in cutepipe
 
 This is a slightly modified version of my 2nd place entry to the Kaggle Stumbleupon Evergreen competition.
 
-Overview
------------
 
 This model only uses textual features from the provided features. First I extract text from the html. I also extract 
 boilerplate using boilerpipe (additionally to the one provided).
