@@ -1,10 +1,12 @@
 from util import *
 from data import get_labels
+import os
 
 from sklearn.metrics import roc_auc_score
 from scipy.optimize import nnls
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.cross_validation import KFold
+from data import get_test, get_train
 
 
 def auc(s):
@@ -23,7 +25,11 @@ def weight_selected(data, labels):
 
 
 def main():
-    scores = load('scores')
+    
+    os.system("mkdir generated; mv score generated/score")
+    os.system("mkdir data; mv trainfile data/train.tsv; mv testfile data/test.tsv")
+    get_test() 
+    scores = load('score')
     labels = get_labels()
 
     scores_with_raw = np.vstack(scores.values()).T

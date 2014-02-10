@@ -1,4 +1,5 @@
 import re, datetime, json
+import os
 
 from unidecode import unidecode
 from boilerpipe.extract import Extractor
@@ -9,14 +10,18 @@ from data import get_test, get_train
 
 
 # html tags of interest
-TAGS = ['title', 'h1', 'h2', 'h3', 'meta-description', 'meta-keywords',
-        'img', 'a', 'other']
-
+TAGS = ['title', 'h1', 'h2', 'h3', 'meta-description', 'meta-keywords', 'body', 'img', 'a', 'other']
 
 def main():
+    #unzip raw_content file
+    os.system("unzip zipRawcontent; mkdir data; mv raw_content data/")
+    os.system("cp trainfile data/train.tsv")
+    os.system("cp testfile data/test.tsv")
+    os.system("mkdir ../generated ")
+ 
     data = get_train() + get_test()
 
-    f = file('generated/extracted_text', 'w')
+    f = file('extracted_text', 'w')
 
     for i, item in enumerate(data):
         # status update
@@ -29,6 +34,7 @@ def main():
 
         # given boilerplate
         data['boilerplate'] = [item['title'], item['body']]
+       
 
         # extract text
         extractor = Extractor(extractor='ArticleExtractor', html=unicode(soup))

@@ -1,4 +1,5 @@
 import json, re
+import os
 
 from util import *
 from collections import Counter
@@ -9,7 +10,9 @@ from parse_html import clean_string, TAGS
 
 def main():
     # load data
-    path = 'generated/extracted_text'
+    #path = 'generated/extracted_text'
+    os.system("mkdir generated")
+    path = 'extracted_text'
     data = map(json.loads, file(path))
 
     # count word for every tag
@@ -32,6 +35,8 @@ def main():
 
     save('text_features', features)
     save('text_vectorizer', v)
+    os.system("mv generated/text_features . ")
+    os.system("mv generated/text_vectorizer . ")
 
 
 def tokenize(string):

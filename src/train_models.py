@@ -3,6 +3,7 @@ Train all the individual models
 """
 
 from util import *
+import os
 from feature_sets import get_featureset
 from data import get_labels
 
@@ -16,6 +17,9 @@ import gensim
 
 
 def main():
+    
+    os.system("mkdir generated; cp text_features generated/; cp text_vectorizer generated/")
+    os.system("mkdir data; mv trainfile data/train.tsv; mv testfile data/test.tsv")
     scores = load('scores', {})
 
     PREPROCESSING = {
@@ -36,7 +40,7 @@ def main():
             if name in scores:
                 continue
 
-            # we can only do iton some datasets
+            # we can only do it on some datasets
             if method == 'lda':
                 if 'dataset' not in LDA_DATASETS:
                     continue
